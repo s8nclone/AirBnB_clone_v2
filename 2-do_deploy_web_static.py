@@ -49,8 +49,5 @@ def do_deploy(archive_path):
         run(f"ln -s {remote_web_static_path} {symlink}")
         print('New version deployed!')
     except Exception as e:
-        # print("Some other exceptions within try block occured")
-        print(e)
         return False
-
     return True
