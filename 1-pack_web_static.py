@@ -6,6 +6,7 @@ function: do_pack()
 """
 from fabric.api import local
 from datetime import datetime
+import os
 
 
 def do_pack():
@@ -14,7 +15,12 @@ def do_pack():
     current_time = datetime.utcnow().strftime(
         "%Y%m%d%H%M%S")
     archive_name = f"web_static_{current_time}.tgz"
+    archive_path = f"versions/{archive_name}"
+
     local(f"mkdir -p versions")
-    if local(f"tar -czvf versions/{archive_name} web_static").failed:
+    if local(f"tar -czvf {archive_path} web_static").failed:
         return None
-    return f"versions/{archive_name}"
+
+    size = os.stat(archive_path).st_size
+    print('web_static packed: {} -> {}Bytes'.format(archive_path, size))
+    return archive_path
