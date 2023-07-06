@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 """
 Generates a .tgz archive from the contents of the web_static folder
 
